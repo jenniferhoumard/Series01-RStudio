@@ -2,10 +2,35 @@
 title: "Series01-RStudio"
 ---
 
-## Quarto
+### Analysis Plan
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+1.  Import data and create data frame
+2.  Check that the tabel was correctly uploaded
+3.  Check the structure of the data
+4.  Get the descriptive statistics of the data
+5.  Interpret the summary of the data
+6.  
+
+### Step 1 — Import the data and create data frame required for the data analysis
+
+```{r Load libraries}
+# Load tidyverse library, collection of packages for data manipulation and visualization.
+library(tidyverse) # read_csv() belongs to the readr package, which is included in tidyverse.
+
+# Read the CSV file from the "data" folder.
+data <- read_csv("data/IEAP-2025 - Sheet1.csv") # <- means "store the result in data" We are storing the imported dataset in an object called "data".
+
+```
+
+### Step 2 — Check that the table was imported correctly
 
 ```{r}
-1 + 1
+
+
 ```
+
+### Step 2 — Check that the table was imported correctly
+
+### Step 3 — Check the structure of the data
+
+### Step 4 — Get the summary of the whole data frame
