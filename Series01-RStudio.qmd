@@ -25,11 +25,10 @@ data <- read_csv("data/IEAP-2025 - Sheet1.csv") # <- means "store the result in 
 ### Step 2 — Check that the table was imported correctly
 
 ```{r}
-
-
+# Display the dataset in the output (rows and columns)
+data
+View(data)
 ```
-
-### Step 2 — Check that the table was imported correctly
 
 ### Step 3 — Check the structure of the data
 
