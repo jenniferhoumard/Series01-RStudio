@@ -4,14 +4,23 @@ title: "Series01-RStudio"
 
 ### Analysis Plan
 
-1.  Import data and create data frame
-2.  Check that the tabel was correctly uploaded
-3.  Check the structure of the data
-4.  Get the descriptive statistics of the data
-5.  Interpret the summary of the data
-6.  
+1\. Import the data and create the data frame required for the analysis.
+2. Display the data table and check that it was imported correctly.
+3. Check the structure of the data and the type of each variable.
+4. Obtain the main descriptive statistics and summary of the data.
+5. Interpret the summary and explain why it differs between columns.
+6. Check and clean the data before continuing with further analysis.
+7. Visualize the distribution of student weight using:
+ - a boxplot,
+ - a histogram,
+ - a density plot.
+8. Explain and label the x- and y-axes of each visualization, including the units.
+9. Use a boxplot to further examine and summarize the distribution of the data.
+10. Compare the weight distributions of male and female students.
+11. Choose and perform an appropriate statistical test to determine whether male and female weights are significantly different.
+12. Interpret the statistical result and compare it with the visual evidence.
 
-### Step 1 — Import the data and create data frame required for the data analysis
+### Step 1 — Import the data and create the data frame
 
 ```{r Load libraries}
 # Load tidyverse library, collection of packages for data manipulation and visualization.
@@ -22,7 +31,7 @@ data_students <- read_csv("data/IEAP-2025 - Sheet1.csv") # <- means "store the r
 
 ```
 
-### Step 2 — Check that the table was imported correctly
+### Step 2 — Display the data table and check the import
 
 ```{r}
 # Display the dataset in the output (rows and columns)
@@ -31,7 +40,7 @@ data_students
 View(data_students) #A tibble is the tidyverse's modern version of a data frame.
 ```
 
-### Step 3 — Check the structure of the data
+### Step 3 — Check the structure and variable types
 
 ```{r}
 # use glimpse() before doing the analysis to check the structure of the data
@@ -41,7 +50,7 @@ glimpse(data) # <chr> = character → text, <dbl> = double → numerical value, 
 # YearsInPython <chr> should be numeric and this is why we use glimpse()
 ```
 
-### Step 4 - Summary of Student Dataframe
+### Step 4 - Obtain descriptive statistics summary
 
 ```{r}
 summary(data_students)
@@ -55,4 +64,24 @@ For **character/text variables** such as `Name`, `Firstname`, `Gender`, `City`, 
 
 In this dataset, `YearsInPython` is also being treated as a character variable, which suggests that at least one value is not formatted as a number correctly. The data is written in the file with a comma (,) instead of (.).
 
-### Step 5 - 
+### Step 5 - Interpret the summary
+
+### Step 6 - Check and clean the data
+
+### Step 7 - Visualize the biometric data
+
+##### Figure 1 — Weight boxplot
+
+##### Figure 2 — Weight histogram
+
+##### Figure 3 — Weight density plot
+
+### Step 8 - Explain the axes and units of each figure
+
+### Step 9 — Use a boxplot to summarize the distribution
+
+### Step 10 — Compare male and female weight distributions
+
+### Step 11 — Perform a statistical test
+
+### Step 12 — Interpret the results
