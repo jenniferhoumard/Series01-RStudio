@@ -235,6 +235,89 @@ ggplot() + # Start an empty ggplot because different parts of the graph will be 
 
 ### Step 10 — Compare male and female weight distributions
 
-### Step 11 — Perform a statistical test
+**a) Is the distribution for males and females similar?**
 
-### Step 12 — Interpret the results
+Generate a histogram:
+
+```{r Create a histogram to show the weight distribution by gender}
+
+ggplot(data_students, aes(x = Weight, fill = Gender)) + # Put Weight on the x-axis and and use different fills for Gender
+  geom_histogram(breaks = seq(50, 85, by = 5), position = "identity", alpha = 0.6, colour = "black") + # Create 5 kg bins intervals
+# position = identity means draw the female and male on top of each other when they occupy the same weight interval.
+# alpha controls transparency ( 1= completley solid)
+  scale_fill_manual(values = c("F" = "red", "M" = "blue")) + # Red for females and blue for males
+  
+  
+  xlab("Weight (kg)") + # Label the x-axis and include the unit
+  ylab("Frequency (students)") + # Show the number of students in each weight interval
+  ggtitle("Figure 5: Weight Distribution by Gender") + # Add the figure title
+  theme_minimal() + # Use a clean visual theme
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) # Center and bold the title
+```
+
+**a) Is the histogram the best way to visualize this data for this question?**
+
+- With a small sample, a histogram can be confusing because the shape of the graph can change a lot depending on how the bins are chosen.
+- The same data can look more separated, more grouped, or more uneven just because the weight ranges are divided differently.
+- Since there are only a few students in each gender group, one or two values can noticeably change the height of a bar, so the graph may make the differences between males and females look bigger than they really are.
+
+### Step 11 — **Is the weight of males/females significantly different?**
+
+***Is the weight of males/females significantly different?***
+
+**a) What visualization is best to answer this question?**
+
+- A boxplot with the individual data points is better than the histogram as it lets you directly compare the median and spread of male and female weights, while the individual points show the actual observations and make the small sample size visible.
+
+**b) What statistical test is best to answer this question?**
+
+- Wilcoxon rank-sum test, also called the Mann–Whitney U test
+
+  - We have two independent groups (male and female) and a relatively small sample.
+
+  - It does not require the weight data to follow a normal distribution.
+
+-  A p-value below 0.05 indicates that the difference between the groups is statistically significant.
+
+### Step 12 — Important Concepts
+
+#### Specific Terms
+
+> **Boxplot:** summarizes numerical data using the median, quartiles, whiskers, and possible outliers.
+
+> **IQR (Interquartile Range):** `Q3 - Q1`; shows the spread of the middle 50% of the data.
+
+> **Whiskers:** extend to the smallest and largest values that are not considered outliers.
+
+> **Outliers:** values below `Q1 - 1.5 × IQR` or above `Q3 + 1.5 × IQR`.
+
+> **Distribution:** shows how values are spread and concentrated in a dataset.
+
+> **Histogram:** groups numerical values into bins and shows the frequency in each bin.
+
+> **Bin width:** size of each interval in a histogram; changing it can change how the distribution looks.
+
+> **Density plot:** smooth estimate of where values are concentrated. The total area under the curve equals 1.
+
+> **Mean:** average of all values.
+
+> **Standard deviation (SD):** shows how spread out individual values are around the mean.
+
+> **Standard error (SE):** shows how precise the sample mean is as an estimate of the population mean.
+
+- `SE = SD / √n`
+
+> **Confidence interval (CI):** range showing the uncertainty around an estimate. A narrower CI means a more precise estimate.
+
+> **Wilcoxon rank-sum test:** compares a numerical variable between two independent groups without assuming normality.
+
+> **P-value:** helps determine whether the observed difference is statistically significant.
+
+- `p < 0.05` is usually considered statistically significant.
+
+> **Effect size:** shows how large the difference between groups is. `- r ≈ 0.1` = small, `- r ≈ 0.3` = medium, - r ≥ 0.5\` = large.
+
+> **Independent groups:** separate groups where each observation belongs to only one group.
+
+```         
+```
