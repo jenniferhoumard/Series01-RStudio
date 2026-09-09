@@ -17,8 +17,8 @@ title: "Series01-RStudio"
 # Load tidyverse library, collection of packages for data manipulation and visualization.
 library(tidyverse) # read_csv() belongs to the readr package, which is included in tidyverse.
 
-# Read the CSV file from the "data" folder.
-data <- read_csv("data/IEAP-2025 - Sheet1.csv") # <- means "store the result in data" We are storing the imported dataset in an object called "data".
+# Create datafram by reading the CSV file from the "data" folder.
+data_students <- read_csv("data/IEAP-2025 - Sheet1.csv") # <- means "store the result in data" We are storing the imported dataset in an object called "data".
 
 ```
 
@@ -26,10 +26,33 @@ data <- read_csv("data/IEAP-2025 - Sheet1.csv") # <- means "store the result in 
 
 ```{r}
 # Display the dataset in the output (rows and columns)
-data
-View(data)
+data_students
+
+View(data_students) #A tibble is the tidyverse's modern version of a data frame.
 ```
 
 ### Step 3 — Check the structure of the data
 
-### Step 4 — Get the summary of the whole data frame
+```{r}
+# use glimpse() before doing the analysis to check the structure of the data
+
+glimpse(data) # <chr> = character → text, <dbl> = double → numerical value, <int> = integer → whole numerical value, <lgl> = logical → TRUE or FALSE
+
+# YearsInPython <chr> should be numeric and this is why we use glimpse()
+```
+
+### Step 4 - Summary of Student Dataframe
+
+```{r}
+summary(data_students)
+```
+
+Why is the summary different from one column to the next?
+
+For **numerical variables** such as `BornYear`, `Weight`, `Height`, `YearsInR`, and `YearsInResearch`, R calculates descriptive statistics such as the **minimum, quartiles, median, mean, and maximum**.
+
+For **character/text variables** such as `Name`, `Firstname`, `Gender`, `City`, and `Lab`, these numerical statistics do not make sense, so R instead gives information such as the **number of values, number of unique values, blank values, and character length**.
+
+In this dataset, `YearsInPython` is also being treated as a character variable, which suggests that at least one value is not formatted as a number correctly. The data is written in the file with a comma (,) instead of (.).
+
+### Step 5 - 
