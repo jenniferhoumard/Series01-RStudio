@@ -189,9 +189,45 @@ A boxplot is a graphical representation of a distribution based mainly on the me
 
 ### Step 9 — Reproduce the boxplot to summarize the distribution
 
-```{r}
+```{r First calculate the mean and its 95% confidence interval:}
 
+# Calculate the number of students, mean weight and standard error.
+
+# length counts how many weight values there are in the column.
+n_students <- length(data_students$Weight) 
+
+mean_weight <- mean(data_students$Weight) # Calculate the mean student weight.
+
+# standard error = standard deviation / √number of students
+se_weight <- sd(data_students$Weight) / sqrt(n_students) 
+
+# Calculate the lower and upper limits of the 95% confidence interval of the mean.
+
+ci_margin <- qt(0.975, df = n_students - 1) * se_weight # Calculate how far the 95% confidence interval extends above and below the mean.
+
+ci_lower <- mean_weight - ci_margin # Calculate the lower limit of the 95% confidence interval.
+
+ci_upper <- mean_weight + ci_margin # Calculate the upper limit of the 95% confidence interval.
 ```
+
+```{r Now plot the combined graphs}
+
+ggplot() + # Start an empty ggplot because different parts of the graph will be positioned separately.
+  geom_jitter(data = data_students, aes(x = 1, y = Weight), width = 0.25) + # geom_jitter() plots each students weight as dots. x = 1 puts all the dots roughly on the left side.
+  geom_boxplot(data = data_students, aes(x = 2, y = Weight), width = 0.6) + # Summarize the weight distribution with a boxplot. x = 2 places it in the middle.
+  geom_errorbar(aes(x = 3, ymin = ci_lower, ymax = ci_upper), width = 0.15) + # Show the 95% confidence interval of the mean. x = 3 places it on the right.
+  geom_point(aes(x = 3, y = mean_weight), size = 3) + # Show the mean weight
+  scale_x_continuous(breaks = NULL) + # Remove x-axis numbers because they only position the three elements
+  xlab("") + # Remove the x-axis label because there is no x-axis.
+  ylab("Weight (kg)") + # Label the y-axis as student weight in kilograms.
+  ggtitle("Figure 4: Summary of Student Weight Distribution") +  # Add the title.
+  theme_minimal() + # Apply a clean visual style.
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) # Center the title and make it bold.
+```
+
+**a) What is a confidence interval?**
+
+- 
 
 ### Step 10 — Compare male and female weight distributions
 
