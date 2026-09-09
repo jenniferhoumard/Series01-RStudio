@@ -4,18 +4,20 @@ title: "Series01-RStudio"
 
 ### Analysis Plan
 
-1\. Import the data and create the data frame required for the analysis.
-2. Display the data table and check that it was imported correctly.
-3. Check the structure of the data and the type of each variable.
-4. Obtain the main descriptive statistics and summary of the data.
-5. Interpret the summary and explain why it differs between columns.
-6. Check and clean the data before continuing with further analysis.
-7. Visualize the distribution of student weight using:
- - a boxplot,
- - a histogram,
- - a density plot.
-8. Explain and label the x- and y-axes of each visualization, including the units.
-9. Use a boxplot to further examine and summarize the distribution of the data.
+1.  Import the data and create the data frame required for the analysis.
+2.  Display the data table and check that it was imported correctly.
+3.  Check the structure of the data and the type of each variable.
+4.  Obtain the main descriptive statistics and summary of the data.
+5.  Interpret the summary and explain why it differs between columns.
+6.  Check and clean the data before continuing with further analysis.
+7.  Visualize the distribution of student weight using:
+
+- a boxplot,
+- a histogram,
+- a density plot.
+
+8.  Explain and label the x- and y-axes of each visualization, including the units.
+9.  Use a boxplot to further examine and summarize the distribution of the data.
 10. Compare the weight distributions of male and female students.
 11. Choose and perform an appropriate statistical test to determine whether male and female weights are significantly different.
 12. Interpret the statistical result and compare it with the visual evidence.
@@ -23,48 +25,58 @@ title: "Series01-RStudio"
 ### Step 1 — Import the data and create the data frame
 
 ```{r Load libraries}
-# Load tidyverse library, collection of packages for data manipulation and visualization.
-library(tidyverse) # read_csv() belongs to the readr package, which is included in tidyverse.
 
-# Create datafram by reading the CSV file from the "data" folder.
-data_students <- read_csv("data/IEAP-2025 - Sheet1.csv") # <- means "store the result in data" We are storing the imported dataset in an object called "data".
+# Load tidyverse library, collection of packages for data manipulation and visualization.
+library(tidyverse) 
+
+# Create  adataframe by reading the CSV file from the "data" folder.
+data_students <- read_csv("data/IEAP-2025 - Sheet1.csv") 
+# <- means "store the result in data" We are storing the imported dataset in an object called "data".
+# read_csv() belongs to the readr package, which is included in tidyverse.
 
 ```
 
 ### Step 2 — Display the data table and check the import
 
-```{r}
+```{r Display the dataset}
+
 # Display the dataset in the output (rows and columns)
 data_students
 
-View(data_students) #A tibble is the tidyverse's modern version of a data frame.
+# Open the complete dataset in RStudio's Data Viewer.
+View(data_students) 
 ```
 
 ### Step 3 — Check the structure and variable types
 
-```{r}
+```{r Check the dataset structure}
+
 # use glimpse() before doing the analysis to check the structure of the data
 
-glimpse(data) # <chr> = character → text, <dbl> = double → numerical value, <int> = integer → whole numerical value, <lgl> = logical → TRUE or FALSE
+glimpse(data) 
 
-# YearsInPython <chr> should be numeric and this is why we use glimpse()
+# <chr> = character → text, <dbl> = double → numerical value, <int> = integer → whole numerical value, <lgl> = logical → TRUE or FALSE
+# YearsInPython appears as <chr> even though it should be numeric, which suggests an incorrectly formatted value. This is why we use glipse()
 ```
 
 ### Step 4 - Obtain descriptive statistics summary
 
-```{r}
+```{r Obtain summary of students}
+
+# Show the main summary statistics for every variable in the dataset.
+
 summary(data_students)
 ```
 
-Why is the summary different from one column to the next?
-
-For **numerical variables** such as `BornYear`, `Weight`, `Height`, `YearsInR`, and `YearsInResearch`, R calculates descriptive statistics such as the **minimum, quartiles, median, mean, and maximum**.
-
-For **character/text variables** such as `Name`, `Firstname`, `Gender`, `City`, and `Lab`, these numerical statistics do not make sense, so R instead gives information such as the **number of values, number of unique values, blank values, and character length**.
-
-In this dataset, `YearsInPython` is also being treated as a character variable, which suggests that at least one value is not formatted as a number correctly. The data is written in the file with a comma (,) instead of (.).
-
 ### Step 5 - Interpret the summary
+
+***Why is the summary different from one column to the next?***
+
+- For **numerical variables** such as `BornYear`, `Weight`, `Height`, `YearsInR`, and `YearsInResearch`, R calculates descriptive statistics such as the minimum, quartiles, median, mean, and maximum.
+
+- For **character/text variables** such as `Name`, `Firstname`, `Gender`, `City`, and `Lab`, these numerical statistics do not make sense, so R instead gives information such as the number of values, number of unique values, blank values, and character length.
+
+- In this dataset, `YearsInPython` is also being treated as a character variable, which suggests that at least one value is not formatted as a number correctly. The data is written in the file with a comma (,) instead of (.).
 
 ### Step 6 - Check and clean the data
 
