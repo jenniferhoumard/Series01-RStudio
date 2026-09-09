@@ -29,9 +29,12 @@ title: "Series01-RStudio"
 # Load tidyverse library, collection of packages for data manipulation and visualization.
 library(tidyverse) 
 
-# Create  adataframe by reading the CSV file from the "data" folder.
+# Create a dataframe by reading the CSV file from the "data" folder.
+
 data_students <- read_csv("data/IEAP-2025 - Sheet1.csv") 
+
 # <- means "store the result in data" We are storing the imported dataset in an object called "data".
+
 # read_csv() belongs to the readr package, which is included in tidyverse.
 
 ```
@@ -56,6 +59,7 @@ View(data_students)
 glimpse(data) 
 
 # <chr> = character → text, <dbl> = double → numerical value, <int> = integer → whole numerical value, <lgl> = logical → TRUE or FALSE
+
 # YearsInPython appears as <chr> even though it should be numeric, which suggests an incorrectly formatted value. This is why we use glipse()
 ```
 
@@ -80,20 +84,84 @@ summary(data_students)
 
 ### Step 6 - Check and clean the data
 
+In this dataset, `YearsInPython` appears to have a formatting issue, but because the analysis below focuses on the `Weight` variable and `Weight` is already correctly stored as numerical data, no additional cleaning is required for the next steps.
+
 ### Step 7 - Visualize the biometric data
 
-##### Figure 1 — Weight boxplot
+##### Figure 1 — Distribution of student weight boxplot
 
-##### Figure 2 — Weight histogram
+```{r Create a boxplot of student weight distribution}
 
-##### Figure 3 — Weight density plot
+# Create a horizontal boxplot of student weight using ggplot2.
 
-### Step 8 - Explain the axes and units of each figure
+ggplot(data_students, aes(x = Weight)) + # ggplot start/create a graph
+  
+  geom_boxplot() + # geometric object (geom) tells ggplot the type of visual representation.
+  
+  xlab("Weight (kg)") + # label the x-axis
+  
+  ggtitle("Figure 1: Distribution of Student Weight Boxplot") + # ggtitle adds the title above the graph
+  
+  theme_minimal() + # Use a clean visual theme
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"), # hjust centers the text
+    axis.title.y = element_blank(), # leave y-axis title label blank
+    axis.text.y = element_blank(), # leave y-axis label blank
+    axis.ticks.y = element_blank() # leave y-axis ticks blank
+  )
+  
+# data_students = data frame to use
+# aes() = aesthetics mapping tells R which variables go where. x = Weight = put the Weight column on the x-axis
+# + adds an additional layer to the plot
+# theme() controls style of ggplot
+# plot.title specifies which part of the graph you want to change
+# element_text() tells ggplot that you want to change the formatting of text.
+# hjust = horizontal justification (0=left, 0.5= center, 1= right)
+  
+```
 
-### Step 9 — Use a boxplot to summarize the distribution
+> *Figure 1: Boxplot of Student Weight Distribution. The x-axis represents student weight in kilograms (kg). The boxplot summarizes the median, quartiles, and overall spread of student weight. The y-axis does not represent a measured variable and is therefore omitted.*
 
-### Step 10 — Compare male and female weight distributions
+##### **Figure 2 — Distribution of student weight histogram**
 
-### Step 11 — Perform a statistical test
+```{r Create a histogram of student weight distributio}
 
-### Step 12 — Interpret the results
+ggplot(data_students, aes(x = Weight)) + # Start the graph and put Weight on the x-axis
+  
+  geom_histogram( breaks = seq (50, 85, by = 5), colour = "black", fill = "grey") + # Create a histogram by grouping weights into intervals (bins) at 5 kg intervals. Add black border and grey filling
+  
+  xlab("Weight (kg)") + # Label the x-axis with the variable and unit
+  ylab("Frequency") + # Label the y-axis as the number of students in each weight interval
+  
+  ggtitle("Figure 2: Distribution of Student Weight Histogram") + # Add the figure title
+  
+  theme_minimal() + # Use a clean visual theme
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) # Center and bold the title
+
+```
+
+> *Figure 2: Histogram of Student Weight Distribution. The x-axis represents student weight in kilograms (kg), and the y-axis represents frequency, meaning the number of students falling within each 5 kg weight interval.*
+
+##### Figure 3 — Distribution of student weight density plot
+
+```{r Create a density plot of student weight distribution}
+
+# Create a variable that stores the density estimate calculated from the Weight column.
+weight_density <- density(data_students$Weight)
+
+# Plot the density curve.
+plot(weight_density,
+     main = "Figure 3: Distribution of Student Weight Density Plot", # Title
+     xlab = "Weight (kg)", # X-axis label and unit
+     ylab = "Density") # Y-axis label
+```
+
+> *Figure 3: Density Plot of Student Weight Distribution. The x-axis represents student weight in kilograms (kg). The y-axis represents density, which is a smoothed estimate of how concentrated the student weight values are across the weight range. Higher parts of the curve indicate weights where more observations are concentrated, while lower parts indicate fewer observations. The total area under the density curve equals 1.*
+
+### Step 8 — Use a boxplot to summarize the distribution
+
+### Step 9 — Compare male and female weight distributions
+
+### Step 10 — Perform a statistical test
+
+### Step 11 — Interpret the results
