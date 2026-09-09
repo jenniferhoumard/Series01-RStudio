@@ -169,7 +169,7 @@ A boxplot is a graphical representation of a distribution based mainly on the me
 - **Q3:** the value below which 75% of the observations fall.
 - **Box:** extends from Q1 to Q3 and therefore contains the middle 50% of the observations.
 - **Interquartile range (IQR):** The **IQR (interquartile range)** is calculated as `Q3 − Q1` and represents the spread of the middle 50% of the data. It is useful because it shows how variable the central part of the distribution is without being strongly affected by extreme values.
--  **1.5 × IQR rule** : used to identify possible outliers: values below `Q1 − 1.5 × IQR` or above `Q3 + 1.5 × IQR` are considered potential outliers, while the whiskers extend to the most extreme values that are still within these limits.
+- **1.5 × IQR rule** : used to identify possible outliers: values below `Q1 − 1.5 × IQR` or above `Q3 + 1.5 × IQR` are considered potential outliers, while the whiskers extend to the most extreme values that are still within these limits.
 - **Whiskers:** The whiskers extend from the box to the smallest and largest values that are still considered part of the normal data, while values beyond the whiskers are shown separately as possible outliers.
 - **Outliers:** observations beyond the whiskers.
 
@@ -225,9 +225,13 @@ ggplot() + # Start an empty ggplot because different parts of the graph will be 
   theme(plot.title = element_text(hjust = 0.5, face = "bold")) # Center the title and make it bold.
 ```
 
+> > *Figure 4: The three representations are shown together because they provide complementary information about the same data: the individual points show the raw observations, the boxplot summarizes the distribution, and the mean with its 95% confidence interval shows the estimated average and the uncertainty around that estimate.*
+
 **a) What is a confidence interval?**
 
-- 
+- A **confidence interval (CI)** gives a range around an estimate, in this case, around the sample mean weight—to show how precise that estimate is.
+
+- A narrow CI means the mean is estimated relatively precisely; a wide CI means there is more uncertainty. The width depends especially on sample size and how variable the data are.
 
 ### Step 10 — Compare male and female weight distributions
 
